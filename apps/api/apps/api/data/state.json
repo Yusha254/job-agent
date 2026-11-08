@@ -13,79 +13,80 @@
       "growth/mentorship": 10
     }
   },
-  "profile": [],
+  "profile": [
+    {
+      "id": "7aef42d6-fde6-4fdd-9b06-2ab925d25ed9",
+      "text": "Developed Ganji, an Android M-Pesa expense analytics app using React Native, Expo (SDK 54), Expo Router, Expo SQLite, and NativeWind.",
+      "section": "projects",
+      "status": "confirmed",
+      "source": "GitHub: https://github.com/Yusha254",
+      "sourceUrl": "https://github.com/Yusha254",
+      "evidence": "Ganji is an Android-based mobile application built with React Native and Expo... Tech Stack: Expo (SDK 54) / React Native, Navigation: Expo Router, Database: Expo SQLite, Styling: NativeWind"
+    },
+    {
+      "id": "a9ac3fc2-42ee-41b4-b63a-75855bf403c6",
+      "text": "Developed job-agent, a job-application workspace with a NestJS API, Next.js dashboard, and TypeScript.",
+      "section": "projects",
+      "status": "confirmed",
+      "source": "GitHub: https://github.com/Yusha254",
+      "sourceUrl": "https://github.com/Yusha254",
+      "evidence": "A local-first job-application workspace with a NestJS API and Next.js dashboard."
+    },
+    {
+      "id": "3bd28cf7-d623-4403-a5f7-781e5861eb3b",
+      "text": "Located in Nairobi, Kenya.",
+      "section": "location",
+      "status": "confirmed",
+      "source": "GitHub: https://github.com/Yusha254",
+      "sourceUrl": "https://github.com/Yusha254",
+      "evidence": "Location: Nairobi, Kenya"
+    },
+    {
+      "id": "47ca73ae-29b7-4eaf-b7df-5369d71bd437",
+      "text": "Lists languages as Kotlin, JavaScript, TypeScript, HTML5, and CSS3.",
+      "section": "skills",
+      "status": "confirmed",
+      "source": "GitHub: https://github.com/Yusha254",
+      "sourceUrl": "https://github.com/Yusha254",
+      "evidence": "Languages: Kotlin, JavaScript, TypeScript, HTML5, CSS3"
+    },
+    {
+      "id": "df94ab27-3445-4055-afe7-bb11c7d6af3a",
+      "text": "Lists frameworks as React, Jetpack Compose, and Express.",
+      "section": "skills",
+      "status": "confirmed",
+      "source": "GitHub: https://github.com/Yusha254",
+      "sourceUrl": "https://github.com/Yusha254",
+      "evidence": "Frameworks: React, Jetpack Compose, Express"
+    },
+    {
+      "id": "8c25b659-fbd8-4029-924e-419814d713f5",
+      "text": "Maintains personal website at https://joshuakyalo.netlify.app.",
+      "section": "links",
+      "status": "confirmed",
+      "source": "GitHub: https://github.com/Yusha254",
+      "sourceUrl": "https://github.com/Yusha254",
+      "evidence": "Website: https://joshuakyalo.netlify.app"
+    },
+    {
+      "id": "24743ca9-a15e-4839-bc6d-0228a9ccc77b",
+      "text": "Lists Node.js as an environment.",
+      "section": "skills",
+      "status": "confirmed",
+      "source": "GitHub: https://github.com/Yusha254",
+      "sourceUrl": "https://github.com/Yusha254",
+      "evidence": "Environment: Node.js"
+    }
+  ],
   "jobs": [],
   "questions": [],
   "proposedFacts": [
-    {
-      "text": "Located in Nairobi, Kenya.",
-      "section": "location",
-      "evidence": "Location: Nairobi, Kenya",
-      "source": "GitHub: https://github.com/Yusha254",
-      "id": "3bd28cf7-d623-4403-a5f7-781e5861eb3b",
-      "status": "proposed",
-      "sourceUrl": "https://github.com/Yusha254"
-    },
-    {
-      "text": "Lists languages as Kotlin, JavaScript, TypeScript, HTML5, and CSS3.",
-      "section": "skills",
-      "evidence": "Languages: Kotlin, JavaScript, TypeScript, HTML5, CSS3",
-      "source": "GitHub: https://github.com/Yusha254",
-      "id": "47ca73ae-29b7-4eaf-b7df-5369d71bd437",
-      "status": "proposed",
-      "sourceUrl": "https://github.com/Yusha254"
-    },
-    {
-      "text": "Lists frameworks as React, Jetpack Compose, and Express.",
-      "section": "skills",
-      "evidence": "Frameworks: React, Jetpack Compose, Express",
-      "source": "GitHub: https://github.com/Yusha254",
-      "id": "df94ab27-3445-4055-afe7-bb11c7d6af3a",
-      "status": "proposed",
-      "sourceUrl": "https://github.com/Yusha254"
-    },
-    {
-      "text": "Lists Node.js as an environment.",
-      "section": "skills",
-      "evidence": "Environment: Node.js",
-      "source": "GitHub: https://github.com/Yusha254",
-      "id": "24743ca9-a15e-4839-bc6d-0228a9ccc77b",
-      "status": "proposed",
-      "sourceUrl": "https://github.com/Yusha254"
-    },
-    {
-      "text": "Maintains personal website at https://joshuakyalo.netlify.app.",
-      "section": "links",
-      "evidence": "Website: https://joshuakyalo.netlify.app",
-      "source": "GitHub: https://github.com/Yusha254",
-      "id": "8c25b659-fbd8-4029-924e-419814d713f5",
-      "status": "proposed",
-      "sourceUrl": "https://github.com/Yusha254"
-    },
-    {
-      "text": "Developed job-agent, a job-application workspace with a NestJS API, Next.js dashboard, and TypeScript.",
-      "section": "projects",
-      "evidence": "A local-first job-application workspace with a NestJS API and Next.js dashboard.",
-      "source": "GitHub: https://github.com/Yusha254",
-      "id": "a9ac3fc2-42ee-41b4-b63a-75855bf403c6",
-      "status": "proposed",
-      "sourceUrl": "https://github.com/Yusha254"
-    },
     {
       "text": "Developed BudgetMaster, an offline-first MPESA SMS expense tracking app using React Native, TypeScript, Expo Dev Client, and SQLite.",
       "section": "projects",
       "evidence": "BudgetMaster is a React Native app (runs on Expo Dev Client)... stores each transaction in a local SQLite database",
       "source": "GitHub: https://github.com/Yusha254",
       "id": "e4577b5f-1cb2-41c1-96b4-ca1d2d08018b",
-      "status": "proposed",
-      "sourceUrl": "https://github.com/Yusha254"
-    },
-    {
-      "text": "Developed Ganji, an Android M-Pesa expense analytics app using React Native, Expo (SDK 54), Expo Router, Expo SQLite, and NativeWind.",
-      "section": "projects",
-      "evidence": "Ganji is an Android-based mobile application built with React Native and Expo... Tech Stack: Expo (SDK 54) / React Native, Navigation: Expo Router, Database: Expo SQLite, Styling: NativeWind",
-      "source": "GitHub: https://github.com/Yusha254",
-      "id": "7aef42d6-fde6-4fdd-9b06-2ab925d25ed9",
       "status": "proposed",
       "sourceUrl": "https://github.com/Yusha254"
     }

@@ -169,8 +169,19 @@ export class JobsService {
 
   async importProfile(file?: UploadedDocument) {
     if (!file) throw new BadRequestException('Choose a CV file to import.');
-    const text = await this.documents.read(file);
-    return this.proposeProfileFacts(text, `CV: ${file.originalname}`, '');
+    const extension = file.originalname.split('.').pop()?.toLowerCase() ?? 'unknown';
+    let phase = 'document parsing';
+    try {
+      const text = await this.documents.read(file);
+      phase = 'model profile extraction';
+      const result = await this.proposeProfileFacts(text, `CV upload (${extension})`, '');
+      console.info(`[CV import] completed: ${extension}, ${file.buffer.length} bytes`);
+      return result;
+    } catch (error) {
+      const reason = error instanceof Error ? error.message : 'unknown failure';
+      console.error(`[CV import] failed during ${phase}: ${extension}, ${file.buffer.length} bytes (${reason})`);
+      throw error;
+    }
   }
 
   async importGithub(url: string) {

@@ -32,6 +32,10 @@ export class DocumentReader {
       try {
         const result = await parser.getText();
         return this.requireText(result.text, 'This PDF has no selectable text. Upload page screenshots or a text-based PDF.');
+      } catch (error) {
+        if (error instanceof BadRequestException) throw error;
+        const reason = error instanceof Error ? error.message : 'unrecognized PDF format';
+        throw new BadRequestException(`Could not extract text from PDF: ${reason}`);
       } finally {
         await parser.destroy();
       }

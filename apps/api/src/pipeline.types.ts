@@ -17,6 +17,24 @@ export type ProfileLine = {
   text: string;
   section: string;
   status: 'confirmed' | 'proposed';
+  source?: string;
+  sourceUrl?: string;
+  evidence?: string;
+};
+
+export type UserSettings = {
+  name: string;
+  homeLocation: string;
+  githubUrl: string;
+  applyThreshold: number;
+  skipThreshold: number;
+  weights: {
+    skills: number;
+    'experience/qualifications': number;
+    location: number;
+    pay: number;
+    'growth/mentorship': number;
+  };
 };
 
 export type ExtractedJob = {
@@ -41,6 +59,7 @@ export type PipelineJob = {
   sourceUrl: string;
   applyUrl: string;
   posting: string;
+  attachmentName?: string;
   status: JobStatus;
   extraction?: ExtractedJob;
   score?: Record<string, unknown>;
@@ -51,6 +70,7 @@ export type PipelineJob = {
 };
 
 export type PipelineState = {
+  settings: UserSettings;
   profile: ProfileLine[];
   jobs: PipelineJob[];
   questions: Array<Record<string, unknown>>;

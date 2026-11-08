@@ -3,8 +3,8 @@
 import { FormEvent, useEffect, useState } from 'react';
 import {
   ArrowDownUp, ArrowRight, BadgeCheck, BriefcaseBusiness, Check, ChevronDown, CircleAlert,
-  CircleHelp, ClipboardCheck, FilePlus2, FileText, Filter, Globe2, Inbox, LoaderCircle,
-  MapPin, Plus, Search, Send, Settings2, ShieldCheck, Sparkles, UserRound, X,
+  CircleHelp, ClipboardCheck, ExternalLink, FilePlus2, FileText, Filter, Globe2, Inbox, LoaderCircle,
+  MapPin, Plus, Search, Send, Settings2, ShieldCheck, Sparkles, Upload, UserRound, X,
 } from 'lucide-react';
 
 type JobStatus = 'NEW' | 'EXTRACTED' | 'FILTERED_OUT' | 'REJECTED' | 'SCORED' | 'AWAITING_ANSWERS' | 'DRAFTED' | 'VERIFIED' | 'AWAITING_APPROVAL' | 'APPROVED' | 'SENT' | 'SKIPPED';
@@ -13,17 +13,32 @@ type Job = {
   posting: string; status: JobStatus; extraction?: any; score?: any; draft?: any;
   verification?: any; filterReason?: string;
 };
-type ProfileLine = { id: string; text: string; section: string; status: 'confirmed' | 'proposed' };
-type Dashboard = { jobs: Job[]; profile: ProfileLine[]; questions: any[]; proposedFacts: any[]; counts: Record<string, number> };
+type ProfileLine = { id: string; text: string; section: string; status: 'confirmed' | 'proposed'; source?: string; sourceUrl?: string; evidence?: string };
+type UserSettings = {
+  name: string; homeLocation: string; githubUrl: string; applyThreshold: number; skipThreshold: number;
+  weights: { skills: number; 'experience/qualifications': number; location: number; pay: number; 'growth/mentorship': number };
+};
+type Dashboard = { settings: UserSettings; jobs: Job[]; profile: ProfileLine[]; questions: any[]; proposedFacts: any[]; counts: Record<string, number> };
 
-const API = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000/api';
+const API = '/api';
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const response = await fetch(`${API}${path}`, {
-    ...init,
-    headers: { 'Content-Type': 'application/json', ...init?.headers },
-  });
-  const payload = await response.json().catch(() => ({}));
+  let response: Response;
+  try {
+    const headers = new Headers(init?.headers);
+    if (!(init?.body instanceof FormData)) headers.set('Content-Type', 'application/json');
+    response = await fetch(`${API}${path}`, {
+      ...init,
+      headers,
+    });
+  } catch {
+    throw new Error('The local API could not be reached. Start the workspace with `npm run dev`.');
+  }
+  const isJson = response.headers.get('content-type')?.includes('application/json');
+  const payload = isJson ? await response.json().catch(() => ({})) : {};
+  if (!isJson && response.status >= 500) {
+    throw new Error('The Nest API is not responding. Start both apps with `npm run dev` from the workspace root.');
+  }
   if (!response.ok) throw new Error(payload.message ?? `Request failed (${response.status})`);
   return payload as T;
 }
@@ -40,7 +55,10 @@ function companyName(job: Job) { return job.extraction?.company || 'Company not 
 function formattedDate(value: string) { return new Date(value).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }); }
 
 export default function Home() {
-  const [data, setData] = useState<Dashboard>({ jobs: [], profile: [], questions: [], proposedFacts: [], counts: {} });
+  const [data, setData] = useState<Dashboard>({
+    settings: { name: 'Joshua Kyalo', homeLocation: 'Kenya', githubUrl: '', applyThreshold: 65, skipThreshold: 50, weights: { skills: 40, 'experience/qualifications': 20, location: 15, pay: 15, 'growth/mentorship': 10 } },
+    jobs: [], profile: [], questions: [], proposedFacts: [], counts: {},
+  });
   const [selectedId, setSelectedId] = useState('');
   const [filter, setFilter] = useState('All roles');
   const [search, setSearch] = useState('');
@@ -50,10 +68,12 @@ export default function Home() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [profileText, setProfileText] = useState('');
   const [showProfileForm, setShowProfileForm] = useState(false);
+  const [githubUrl, setGithubUrl] = useState('');
 
   async function refresh() {
     const result = await request<Dashboard>('/dashboard');
     setData(result);
+    setGithubUrl((current) => current || result.settings.githubUrl || '');
     setSelectedId((current) => current && result.jobs.some((job) => job.id === current) ? current : result.jobs[0]?.id ?? '');
   }
 
@@ -70,7 +90,12 @@ export default function Home() {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     await act('create', async () => {
-      const job = await request<Job>('/jobs', { method: 'POST', body: JSON.stringify({ posting: form.get('posting'), sourceUrl: form.get('sourceUrl'), applyUrl: form.get('applyUrl') }) });
+      const file = form.get('file');
+      const hasFile = file instanceof File && file.size > 0;
+      const job = await request<Job>('/jobs', {
+        method: 'POST',
+        body: hasFile ? form : JSON.stringify({ posting: form.get('posting'), sourceUrl: form.get('sourceUrl'), applyUrl: form.get('applyUrl') }),
+      });
       setSelectedId(job.id); setCompose(false);
     });
   }
@@ -95,6 +120,21 @@ export default function Home() {
     setProfileText(''); setShowProfileForm(false);
   }
 
+  async function importCV(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (file) {
+      const form = new FormData();
+      form.append('file', file);
+      await act('cv-import', () => request('/profile/import', { method: 'POST', body: form }));
+    }
+    event.target.value = '';
+  }
+
+  async function importGithub(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    await act('github-import', () => request('/profile/github', { method: 'POST', body: JSON.stringify({ url: githubUrl }) }));
+  }
+
   const selected = data.jobs.find((job) => job.id === selectedId);
   const visibleJobs = data.jobs.filter((job) => {
     const term = search.toLowerCase();
@@ -116,7 +156,7 @@ export default function Home() {
         <div className="rail-label">WORKSPACE</div>
         <button className="rail-link active"><BriefcaseBusiness size={17} /><span>Applications</span><span className="nav-count">{data.jobs.length}</span></button>
         <button className="rail-link" onClick={() => document.getElementById('profile')?.scrollIntoView({ behavior: 'smooth' })}><UserRound size={17} /><span>Profile</span></button>
-        <div className="rail-bottom"><span className="avatar">JK</span><div><strong>Joshua Kyalo</strong><small>Personal workspace</small></div><Settings2 size={16} /></div>
+        <div className="rail-bottom"><span className="avatar">{data.settings.name.split(/\s+/).map((part) => part[0]).join('').slice(0, 2).toUpperCase()}</span><div><strong>{data.settings.name}</strong><small>Personal workspace</small></div><a className="settings-link" href="/settings" aria-label="Settings" title="Settings"><Settings2 size={16} /></a></div>
       </aside>
 
       <section className="main-area">
@@ -180,9 +220,10 @@ export default function Home() {
           {data.questions.length > 0 && <section className="workflow-section" id="questions"><div className="section-title"><div><div className="eyebrow">PROFILE, ONCE</div><h2>Quick answers</h2></div><span>{data.questions.length} questions · shared across roles</span></div><form onSubmit={submitAnswers} className="question-grid">{data.questions.map((question) => <label className="question-item" key={question.id}><span>{question.text}</span><small>{question.answer_format || 'One-line answer; None is okay'}</small><input value={answers[question.id] ?? ''} onChange={(event) => setAnswers((current) => ({ ...current, [question.id]: event.target.value }))} placeholder="Your answer or None" /></label>)}<button className="primary-button" disabled={Boolean(busy)}>{busy === 'answers' ? <LoaderCircle className="spin" size={16} /> : <Check size={16} />}Save answers for review</button></form></section>}
 
           <section className="workflow-section profile-section" id="profile"><div className="section-title"><div><div className="eyebrow">YOUR SOURCE OF TRUTH</div><h2>Profile facts</h2></div><button className="secondary-button" onClick={() => setShowProfileForm((current) => !current)}><Plus size={15} /> Add fact</button></div><p className="section-subtitle">Only confirmed facts can support a score or draft. Proposed facts stay out until you approve them.</p>
+            <div className="profile-imports"><label className="secondary-button upload-button"><Upload size={15} />{busy === 'cv-import' ? 'Reading CV…' : 'Import CV'}<input type="file" accept=".pdf,.docx,.txt,.md,.rtf,.png,.jpg,.jpeg,.webp" onChange={importCV} disabled={Boolean(busy)} /></label><form onSubmit={importGithub}><input type="url" value={githubUrl} onChange={(event) => setGithubUrl(event.target.value)} placeholder="https://github.com/username" aria-label="GitHub profile URL" /><button className="secondary-button" disabled={Boolean(busy)}>{busy === 'github-import' ? <LoaderCircle className="spin" size={15} /> : <ExternalLink size={15} />}Import GitHub</button></form></div>
             {showProfileForm && <form className="profile-add" onSubmit={addProfile}><input value={profileText} onChange={(event) => setProfileText(event.target.value)} placeholder="Add a factual line about your experience" required /><button className="primary-button" disabled={Boolean(busy)}>Save as proposed</button></form>}
-            <div className="profile-list">{data.profile.map((line) => <div className="profile-line" key={line.id}><span className="profile-id">{line.id}</span><span className="profile-text"><strong>{line.section}</strong>{line.text}</span><button className={`fact-status ${line.status}`} onClick={() => act(`fact-${line.id}`, () => request(`/profile/${line.id}`, { method: 'PATCH', body: JSON.stringify({ status: line.status === 'confirmed' ? 'proposed' : 'confirmed' }) }))}>{line.status === 'confirmed' ? <><BadgeCheck size={14} />Confirmed</> : <><CircleAlert size={14} />Proposed</>}</button></div>)}
-              {data.proposedFacts.map((fact) => <div className="profile-line pending-fact" key={fact.id}><span className="profile-id">NEW</span><span className="profile-text"><strong>{fact.section || 'Profile update'}</strong>{fact.text}</span><button className="fact-status proposed" onClick={() => act('approve-facts', () => request('/profile/approve', { method: 'POST', body: JSON.stringify({ ids: [fact.id] }) }))}><Check size={14} />Approve</button></div>)}
+            <div className="profile-list">{data.profile.map((line) => <div className="profile-line" key={line.id}><span className="profile-id">{line.id}</span><span className="profile-text"><strong>{line.section}{line.source ? ` · ${line.source}` : ''}</strong>{line.text}{line.evidence && <small>Evidence: {line.evidence}</small>}</span><button className={`fact-status ${line.status}`} onClick={() => act(`fact-${line.id}`, () => request(`/profile/${line.id}`, { method: 'PATCH', body: JSON.stringify({ status: line.status === 'confirmed' ? 'proposed' : 'confirmed' }) }))}>{line.status === 'confirmed' ? <><BadgeCheck size={14} />Confirmed</> : <><CircleAlert size={14} />Proposed</>}</button></div>)}
+              {data.proposedFacts.map((fact) => <div className="profile-line pending-fact" key={fact.id}><span className="profile-id">NEW</span><span className="profile-text"><strong>{fact.section || 'Profile update'}{fact.source ? ` · ${fact.source}` : ''}</strong>{fact.text}{fact.evidence && <small>Evidence: {fact.evidence}</small>}</span><button className="fact-status proposed" onClick={() => act('approve-facts', () => request('/profile/approve', { method: 'POST', body: JSON.stringify({ ids: [fact.id] }) }))}><Check size={14} />Approve</button></div>)}
               {!data.profile.length && !data.proposedFacts.length && <div className="profile-empty"><UserRound size={19} /><span>Your profile is empty. Add confirmed facts before assessing a role.</span><button className="text-button" onClick={() => setShowProfileForm(true)}>Add a fact <ArrowRight size={14} /></button></div>}
             </div>
           </section>
@@ -190,7 +231,7 @@ export default function Home() {
         </div>
       </section>
 
-      {compose && <div className="modal-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setCompose(false); }}><form className="compose-modal" onSubmit={createJob}><div className="modal-heading"><div><span className="eyebrow">NEW OPPORTUNITY</span><h2>Add a role</h2></div><button type="button" className="icon-button" aria-label="Close" onClick={() => setCompose(false)}><X size={18} /></button></div><label>Posting text<textarea name="posting" placeholder="Paste the full job posting here" rows={8} required /></label><label>Source URL<input name="sourceUrl" type="url" placeholder="https://company.com/careers/role" /></label><label>Resolved apply URL<input name="applyUrl" type="url" placeholder="https://…" /></label><div className="modal-note"><ShieldCheck size={15} />Posting content is treated as untrusted data.</div><div className="modal-actions"><button type="button" className="secondary-button" onClick={() => setCompose(false)}>Cancel</button><button className="primary-button" disabled={Boolean(busy)}>{busy === 'create' ? <LoaderCircle className="spin" size={16} /> : <FilePlus2 size={16} />}Add to queue</button></div></form></div>}
+      {compose && <div className="modal-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setCompose(false); }}><form className="compose-modal" onSubmit={createJob}><div className="modal-heading"><div><span className="eyebrow">NEW OPPORTUNITY</span><h2>Add a role</h2></div><button type="button" className="icon-button" aria-label="Close" onClick={() => setCompose(false)}><X size={18} /></button></div><label>Posting text<textarea name="posting" placeholder="Paste the full job posting here" rows={7} /></label><label className="file-input-label">Or attach a posting<input name="file" type="file" accept=".pdf,.docx,.txt,.md,.rtf,.png,.jpg,.jpeg,.webp" /><small>PDF, DOCX, text, or screenshot · 10 MB max</small></label><label>Source URL<input name="sourceUrl" type="url" placeholder="https://company.com/careers/role" /></label><label>Resolved apply URL<input name="applyUrl" type="url" placeholder="https://…" /></label><div className="modal-note"><ShieldCheck size={15} />Posting content is treated as untrusted data.</div><div className="modal-actions"><button type="button" className="secondary-button" onClick={() => setCompose(false)}>Cancel</button><button className="primary-button" disabled={Boolean(busy)}>{busy === 'create' ? <LoaderCircle className="spin" size={16} /> : <FilePlus2 size={16} />}Add to queue</button></div></form></div>}
     </main>
   );
 }

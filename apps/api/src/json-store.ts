@@ -1,9 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
-import { PipelineState } from './pipeline.types';
+import { PipelineState, UserSettings } from './pipeline.types';
 
-const EMPTY_STATE: PipelineState = { profile: [], jobs: [], questions: [], proposedFacts: [] };
+export const DEFAULT_SETTINGS: UserSettings = {
+  name: 'Joshua Kyalo',
+  homeLocation: 'Kenya',
+  githubUrl: '',
+  applyThreshold: 65,
+  skipThreshold: 50,
+  weights: { skills: 40, 'experience/qualifications': 20, location: 15, pay: 15, 'growth/mentorship': 10 },
+};
+
+const EMPTY_STATE: PipelineState = { settings: DEFAULT_SETTINGS, profile: [], jobs: [], questions: [], proposedFacts: [] };
 
 @Injectable()
 export class JsonStore {
@@ -13,7 +22,16 @@ export class JsonStore {
   async read(): Promise<PipelineState> {
     try {
       const contents = await readFile(this.filePath, 'utf8');
-      return { ...EMPTY_STATE, ...JSON.parse(contents) } as PipelineState;
+      const saved = JSON.parse(contents) as Partial<PipelineState>;
+      return {
+        ...EMPTY_STATE,
+        ...saved,
+        settings: {
+          ...DEFAULT_SETTINGS,
+          ...saved.settings,
+          weights: { ...DEFAULT_SETTINGS.weights, ...saved.settings?.weights },
+        },
+      } as PipelineState;
     } catch (error) {
       if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error;
       return structuredClone(EMPTY_STATE);

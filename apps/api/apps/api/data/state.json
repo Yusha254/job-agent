@@ -89,6 +89,86 @@
       "id": "e4577b5f-1cb2-41c1-96b4-ca1d2d08018b",
       "status": "proposed",
       "sourceUrl": "https://github.com/Yusha254"
+    },
+    {
+      "text": "Junior software developer specializing in React Native and full-stack JavaScript (Node.js, Next.js).",
+      "section": "SUMMARY",
+      "evidence": "Junior software developer specializing in React Native and full-stack JavaScript (Node.js, Next.js).",
+      "source": "CV upload (pdf)",
+      "id": "3c33c734-77be-4fa4-88db-1a536b7061f2",
+      "status": "proposed"
+    },
+    {
+      "text": "Based in Nairobi, Kenya.",
+      "section": "CONTACT",
+      "evidence": "Nairobi, Kenya | +254 712 863 304 | ymuendok@gmail.com",
+      "source": "CV upload (pdf)",
+      "id": "51af7546-2ff1-40ba-b712-3eb5649665c4",
+      "status": "proposed"
+    },
+    {
+      "text": "Technical skills include TypeScript, JavaScript, Next.js, React, React Native, Node.js, PHP (Laravel), Kotlin, Tailwind CSS, Responsive Web Design, SEO fundamentals, Three.js (learning), REST APIs, WebSockets, MongoDB, Firebase, Supabase, PostgreSQL, Git/GitHub, Agile, AI-assisted development (Claude Code, Copilot).",
+      "section": "TECHNICAL SKILLS",
+      "evidence": "Languages & Frameworks: TypeScript, JavaScript, Next.js, React, React Native, Node.js, PHP (Laravel), Kotlin...",
+      "source": "CV upload (pdf)",
+      "id": "3d02851c-596d-4a30-97dd-e0eb98a1c6b3",
+      "status": "proposed"
+    },
+    {
+      "text": "Built Ganji, a React Native mobile app automating personal budgeting by parsing M-Pesa SMS transaction alerts in real time.",
+      "section": "PROJECTS",
+      "evidence": "Ganji — Fintech Expense Tracker Jan 2026 | Personal Project — Built a React Native mobile app that automates personal budgeting by parsing M-Pesa SMS transaction alerts in real time.",
+      "source": "CV upload (pdf)",
+      "id": "cdd56704-6042-44c0-999b-7a8171291f20",
+      "status": "proposed"
+    },
+    {
+      "text": "Built a full-stack multiplayer chess game using React, Node.js, and Socket.IO for real-time move synchronization.",
+      "section": "PROJECTS",
+      "evidence": "Real-Time Multiplayer Chess App Jan–Dec 2025 | Personal Project — Built a full-stack multiplayer chess game using React, Node.js, and Socket.IO for real-time move synchronization.",
+      "source": "CV upload (pdf)",
+      "id": "c9a0b0ab-152c-4ac8-b7f3-2bde1ca2663d",
+      "status": "proposed"
+    },
+    {
+      "text": "Worked as a Freelance Mobile Developer on Yebo Voucher, building the mobile app in React Native and the backend with Node.js and Express.",
+      "section": "EXPERIENCE",
+      "evidence": "Freelance Mobile Developer — Yebo Voucher — live on Google Play 2026 | Contract — Built the mobile app in React Native... Built the backend with Node.js and Express...",
+      "source": "CV upload (pdf)",
+      "id": "81520e6e-ef9a-4bb5-a753-f11d3da9067f",
+      "status": "proposed"
+    },
+    {
+      "text": "Completed IT Support & Networking Attachment at Kenya Revenue Authority from Sep–Nov 2022 in Nairobi.",
+      "section": "EXPERIENCE",
+      "evidence": "IT Support & Networking Attachment — Kenya Revenue Authority Sep–Nov 2022 | Nairobi — Provided IT support across departments, diagnosing and resolving hardware and network issues for staff.",
+      "source": "CV upload (pdf)",
+      "id": "c74c22b8-88e3-4feb-8ab7-1faf8941933a",
+      "status": "proposed"
+    },
+    {
+      "text": "Worked as Junior Frontend Developer (Volunteer) at Songa (Ride-Hailing Prototype) from Jun 2023–Mar 2024 remotely.",
+      "section": "EXPERIENCE",
+      "evidence": "Junior Frontend Developer — Volunteer — Songa (Ride-Hailing Prototype) Jun 2023–Mar 2024 | Remote — Collaborated with a cross-functional team to prototype a ride-hailing application in an Agile workflow.",
+      "source": "CV upload (pdf)",
+      "id": "b8445028-7ff5-4a67-9246-4e9cfcab055a",
+      "status": "proposed"
+    },
+    {
+      "text": "Computer Science coursework in progress at Moi University.",
+      "section": "EDUCATION",
+      "evidence": "Computer Science — Moi University | Coursework in progress",
+      "source": "CV upload (pdf)",
+      "id": "4594e06f-4017-440a-a583-87dd107910bb",
+      "status": "proposed"
+    },
+    {
+      "text": "Holds ALX ProDev Frontend Engineering (Aug–Dec 2025), ALX Professional Foundations (May–Aug 2025), and ALX AI Career Essentials (Mar–Apr 2024) certifications.",
+      "section": "CERTIFICATIONS",
+      "evidence": "ALX ProDev Frontend Engineering (Aug–Dec 2025) • ALX Professional Foundations (May–Aug 2025) • ALX AI Career Essentials (Mar–Apr 2024)",
+      "source": "CV upload (pdf)",
+      "id": "f8a0ac32-14f3-4c98-a139-3e6aa4f767bc",
+      "status": "proposed"
     }
   ]
 }

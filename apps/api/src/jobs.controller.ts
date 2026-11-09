@@ -1,6 +1,8 @@
-import { BadRequestException, Body, Controller, Get, Param, Patch, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { JobsService } from './jobs.service';
+import { JobPipelineService } from './job-pipeline.service';
+import { ProfileService } from './profile.service';
+import { SettingsService } from './settings.service';
 import type { UploadedDocument } from './document-reader';
 
 const documentUpload = () => FileInterceptor('file', {
@@ -13,11 +15,15 @@ const documentUpload = () => FileInterceptor('file', {
 
 @Controller()
 export class JobsController {
-  constructor(private readonly jobs: JobsService) {}
+  constructor(
+    private readonly jobs: JobPipelineService,
+    private readonly profiles: ProfileService,
+    private readonly settings: SettingsService,
+  ) {}
 
   @Get('dashboard') dashboard() { return this.jobs.dashboard(); }
-  @Get('settings') settings() { return this.jobs.getSettings(); }
-  @Patch('settings') updateSettings(@Body() body: Record<string, any>) { return this.jobs.updateSettings(body); }
+  @Get('settings') getSettings() { return this.settings.get(); }
+  @Patch('settings') updateSettings(@Body() body: Record<string, any>) { return this.settings.update(body); }
   @Post('jobs')
   @UseInterceptors(documentUpload())
   addJob(@Body() body: { posting?: string; sourceUrl?: string; applyUrl?: string }, @UploadedFile() file?: UploadedDocument) {
@@ -31,13 +37,21 @@ export class JobsController {
   @Post('jobs/:id/skip') skip(@Param('id') id: string) { return this.jobs.transition(id, 'skip'); }
   @Post('pipeline/questions') questions() { return this.jobs.batchQuestions(); }
   @Post('pipeline/answers') answers(@Body() body: { answers?: Array<{ id: string; answer: string }> }) { return this.jobs.submitAnswers(body); }
-  @Post('profile/approve') approveProfile(@Body() body: { ids?: string[] }) { return this.jobs.approveProfile(body.ids ?? []); }
-  @Post('profile') addProfile(@Body() body: { text?: string; section?: string }) { return this.jobs.addProfileLine(body); }
+  @Post('profile/approve')
+  async approveProfile(@Body() body: { ids?: string[] }) {
+    const profile = await this.profiles.approve(body.ids ?? []);
+    const jobs = await this.jobs.rescoreWaitingJobs();
+    return { profile, jobs };
+  }
+  @Post('profile') addProfile(@Body() body: { text?: string; section?: string }) { return this.profiles.addFact(body); }
   @Post('profile/import')
   @UseInterceptors(documentUpload())
-  importProfile(@UploadedFile() file?: UploadedDocument) { return this.jobs.importProfile(file); }
-  @Post('profile/github') importGithub(@Body() body: { url?: string }) { return this.jobs.importGithub(body.url ?? ''); }
+  importProfile(@UploadedFile() file?: UploadedDocument) { return this.profiles.importCV(file); }
+  @Post('profile/github') importGithub(@Body() body: { url?: string }) { return this.profiles.importGithub(body.url ?? ''); }
+  @Patch('profile/proposals/:id/keep') keepProposal(@Param('id') id: string) { return this.profiles.keepProposal(id); }
+  @Delete('profile/proposals/:id') rejectProposal(@Param('id') id: string) { return this.profiles.reject(id); }
+  @Delete('profile/:id') deleteProfileFact(@Param('id') id: string) { return this.profiles.deleteFact(id); }
   @Patch('profile/:id') updateProfile(@Param('id') id: string, @Body() body: { status?: 'confirmed' | 'proposed' }) {
-    return this.jobs.updateProfileLine(id, body.status === 'confirmed' ? 'confirmed' : 'proposed');
+    return this.profiles.updateStatus(id, body.status === 'confirmed' ? 'confirmed' : 'proposed');
   }
 }

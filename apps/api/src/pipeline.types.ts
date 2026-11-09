@@ -24,7 +24,8 @@ export type ProfileLine = {
 
 export type UserSettings = {
   name: string;
-  homeLocation: string;
+  homeCity: string;
+  homeCountry: string;
   githubUrl: string;
   applyThreshold: number;
   skipThreshold: number;

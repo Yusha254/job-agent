@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Settings {
+  id             Int      @id @default(1)
+  name           String
+  homeCity       String   @default("")
+  homeCountry    String   @default("Kenya")
+  githubUrl      String   @default("")
+  applyThreshold Int      @default(65)
+  skipThreshold  Int      @default(50)
+  weights        Json
+  updatedAt      DateTime @updatedAt
+}
+
+model Job {
+  id             String   @id
+  createdAt      DateTime
+  updatedAt      DateTime
+  sourceUrl      String   @default("")
+  applyUrl       String   @default("")
+  posting        String
+  attachmentName String?
+  status         String
+  extraction     Json?
+  score          Json?
+  draft          Json?
+  verification   Json?
+  filterReason   String?
+  error          String?
+
+  @@index([status, updatedAt])
+  @@index([createdAt])
+}
+
+model ProfileFact {
+  id        String   @id
+  text      String
+  section   String
+  status    String
+  source    String?
+  sourceUrl String?
+  evidence  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status, updatedAt])
+}
+
+model ProposedFact {
+  id        String   @id
+  text      String
+  section   String
+  source    String?
+  sourceUrl String?
+  evidence  String?
+  matches   Json?
+  payload   Json
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+model PipelineQuestion {
+  id       String @id
+  position Int
+  payload  Json
+
+  @@index([position])
+}

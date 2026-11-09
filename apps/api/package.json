@@ -4,13 +4,17 @@
   "private": true,
   "scripts": {
     "dev": "nest start --watch",
-    "build": "nest build",
-    "typecheck": "tsc --noEmit"
+    "build": "prisma generate && nest build",
+    "typecheck": "prisma generate && tsc --noEmit",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.11",
     "@nestjs/core": "^11.0.11",
     "@nestjs/platform-express": "^11.0.11",
+    "@prisma/client": "6.19.0",
     "dotenv": "^16.4.7",
     "mammoth": "^1.13.0",
     "pdf-parse": "^2.4.5",
@@ -22,6 +26,7 @@
     "@types/express": "^5.0.6",
     "@types/node": "^22.13.4",
     "@types/pdf-parse": "^1.1.5",
+    "prisma": "6.19.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   }

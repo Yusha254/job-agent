@@ -1,12 +1,14 @@
 import { Module } from '@nestjs/common';
 import { JobsController } from './jobs.controller';
-import { JobsService } from './jobs.service';
-import { JsonStore } from './json-store';
+import { JobPipelineService } from './job-pipeline.service';
+import { ProfileService } from './profile.service';
+import { SettingsService } from './settings.service';
+import { DatabaseStore } from './database.store';
 import { ModelClient } from './model-client';
 import { DocumentReader } from './document-reader';
 
 @Module({
   controllers: [JobsController],
-  providers: [JobsService, JsonStore, ModelClient, DocumentReader],
+  providers: [JobPipelineService, ProfileService, SettingsService, DatabaseStore, ModelClient, DocumentReader],
 })
 export class AppModule {}

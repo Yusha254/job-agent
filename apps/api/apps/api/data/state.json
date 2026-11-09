@@ -76,9 +76,380 @@
       "source": "GitHub: https://github.com/Yusha254",
       "sourceUrl": "https://github.com/Yusha254",
       "evidence": "Environment: Node.js"
+    },
+    {
+      "id": "3d02851c-596d-4a30-97dd-e0eb98a1c6b3",
+      "text": "Technical skills include TypeScript, JavaScript, Next.js, React, React Native, Node.js, PHP (Laravel), Kotlin, Tailwind CSS, Responsive Web Design, SEO fundamentals, Three.js (learning), REST APIs, WebSockets, MongoDB, Firebase, Supabase, PostgreSQL, Git/GitHub, Agile, AI-assisted development (Claude Code, Copilot).",
+      "section": "TECHNICAL SKILLS",
+      "status": "confirmed",
+      "source": "CV upload (pdf)",
+      "evidence": "Languages & Frameworks: TypeScript, JavaScript, Next.js, React, React Native, Node.js, PHP (Laravel), Kotlin..."
+    },
+    {
+      "id": "81520e6e-ef9a-4bb5-a753-f11d3da9067f",
+      "text": "Worked as a Freelance Mobile Developer on Yebo Voucher, building the mobile app in React Native and the backend with Node.js and Express.",
+      "section": "EXPERIENCE",
+      "status": "confirmed",
+      "source": "CV upload (pdf)",
+      "evidence": "Freelance Mobile Developer — Yebo Voucher — live on Google Play 2026 | Contract — Built the mobile app in React Native... Built the backend with Node.js and Express..."
+    },
+    {
+      "id": "c74c22b8-88e3-4feb-8ab7-1faf8941933a",
+      "text": "Completed IT Support & Networking Attachment at Kenya Revenue Authority from Sep–Nov 2022 in Nairobi.",
+      "section": "EXPERIENCE",
+      "status": "confirmed",
+      "source": "CV upload (pdf)",
+      "evidence": "IT Support & Networking Attachment — Kenya Revenue Authority Sep–Nov 2022 | Nairobi — Provided IT support across departments, diagnosing and resolving hardware and network issues for staff."
+    },
+    {
+      "id": "b8445028-7ff5-4a67-9246-4e9cfcab055a",
+      "text": "Worked as Junior Frontend Developer (Volunteer) at Songa (Ride-Hailing Prototype) from Jun 2023–Mar 2024 remotely.",
+      "section": "EXPERIENCE",
+      "status": "confirmed",
+      "source": "CV upload (pdf)",
+      "evidence": "Junior Frontend Developer — Volunteer — Songa (Ride-Hailing Prototype) Jun 2023–Mar 2024 | Remote — Collaborated with a cross-functional team to prototype a ride-hailing application in an Agile workflow."
+    },
+    {
+      "id": "f8a0ac32-14f3-4c98-a139-3e6aa4f767bc",
+      "text": "Holds ALX ProDev Frontend Engineering (Aug–Dec 2025), ALX Professional Foundations (May–Aug 2025), and ALX AI Career Essentials (Mar–Apr 2024) certifications.",
+      "section": "CERTIFICATIONS",
+      "status": "confirmed",
+      "source": "CV upload (pdf)",
+      "evidence": "ALX ProDev Frontend Engineering (Aug–Dec 2025) • ALX Professional Foundations (May–Aug 2025) • ALX AI Career Essentials (Mar–Apr 2024)"
+    },
+    {
+      "id": "47971b1e-c1b0-45f3-9929-ed0ccdecb55f",
+      "text": "Has experience with web Tailwind CSS and NativeWind for React Native.",
+      "section": "skills",
+      "status": "confirmed",
+      "source": "Your answer"
+    },
+    {
+      "id": "3db0d7b6-5d72-4969-b230-5cf9e7adbb25",
+      "text": "Has experience with Git version control workflows.",
+      "section": "skills",
+      "status": "confirmed",
+      "source": "Your answer"
+    },
+    {
+      "id": "4c9f0cd5-7403-425a-be8b-d222f3d1e06e",
+      "text": "Has working knowledge of SEO fundamentals for web applications.",
+      "section": "skills",
+      "status": "confirmed",
+      "source": "Your answer"
+    },
+    {
+      "id": "aed8c520-7673-4aa6-a4aa-8dc36c8ac688",
+      "text": "Has experience with relational databases including MySQL and PostgreSQL.",
+      "section": "skills",
+      "status": "confirmed",
+      "source": "Your answer"
     }
   ],
-  "jobs": [],
+  "jobs": [
+    {
+      "id": "9063f136-76b2-4dc9-8b16-6d6142e0d087",
+      "createdAt": "2026-11-08T16:41:05.365Z",
+      "updatedAt": "2026-11-08T17:28:07.890Z",
+      "sourceUrl": "",
+      "applyUrl": "",
+      "posting": "Wahome Maina · 2nd\nBusiness Technology Analyst at Nuvana\nwith Nuvana HQ · 1d · Edited\n+ Connect\nWe're hiring a Frontend Development Intern at Nuvana HQ,\nNairobi. \nWe're a small business technology consultancy. We build\nNuvana Business, a retail SaaS for Kenyan SMBs, and ship\nwebsites, e-commerce stores and ERP systems for clients\nacross Kenya.\nYou'll work on our internal projects and sites and contribute to\nclient work. Real work, real users, and every piece of code is\nreviewed before it ships.\nWhat you need\nNuxt / Vue\nTailwind CSS\nGit\nSEO fundamentals\nA GitHub or portfolio we can open\nBonus: TypeScript, SQL and GEO\nWhat you'll learn with us\nNestJS, Python, PostgreSQL, and the basics of deploying and\nrunning production systems.\nThe terms\n3 months, with a 1-month probation\nHybrid: Nairobi and remote, normal business hours\nStipend of KES 7,650 per month\nTo apply\nhttps://lnkd.in/ddp-jUS7\nKnow an intern who fits? Tag them.\n#Hiring #Frontend Developer #Nuxt #Kenya Tech #Nairobi Jobs",
+      "attachmentName": "WhatsApp Image 2026-11-07 at 11.55.50 PM.jpeg",
+      "status": "APPROVED",
+      "extraction": {
+        "company": "Nuvana HQ",
+        "role": "Frontend Development Intern",
+        "location": "Nairobi",
+        "remote": "unclear",
+        "pay": {
+          "stated": "KES 7,650 per month",
+          "signals": [
+            "Stipend of KES 7,650 per month"
+          ]
+        },
+        "contract": "3 months, with a 1-month probation",
+        "seniority_required": "Intern",
+        "apply": {
+          "method": "form",
+          "target": "https://lnkd.in/ddp-jUS7"
+        },
+        "deadline": null,
+        "requirements": [
+          {
+            "id": "R1",
+            "text": "Nuxt / Vue",
+            "type": "must",
+            "kind": "skill"
+          },
+          {
+            "id": "R2",
+            "text": "Tailwind CSS",
+            "type": "must",
+            "kind": "skill"
+          },
+          {
+            "id": "R3",
+            "text": "Git",
+            "type": "must",
+            "kind": "skill"
+          },
+          {
+            "id": "R4",
+            "text": "SEO fundamentals",
+            "type": "must",
+            "kind": "qualification"
+          },
+          {
+            "id": "R5",
+            "text": "A GitHub or portfolio we can open",
+            "type": "must",
+            "kind": "qualification"
+          },
+          {
+            "id": "R6",
+            "text": "TypeScript",
+            "type": "nice",
+            "kind": "skill"
+          },
+          {
+            "id": "R7",
+            "text": "SQL",
+            "type": "nice",
+            "kind": "skill"
+          },
+          {
+            "id": "R8",
+            "text": "GEO",
+            "type": "nice",
+            "kind": "skill"
+          }
+        ],
+        "legitimacy": {
+          "verdict": "flag",
+          "reasons": [
+            "Apply domain could not be matched to the company or a known applicant-tracking portal."
+          ]
+        },
+        "reject": {
+          "rule": null,
+          "reason": null
+        }
+      },
+      "score": {
+        "audit": [
+          {
+            "req_id": "R1",
+            "label": "UNKNOWN",
+            "evidence": [],
+            "stretch": true,
+            "note": "Nuxt/Vue is absent; profile has React and Next.js, which are adjacent component-based frameworks."
+          },
+          {
+            "req_id": "R2",
+            "label": "CONFIRMED",
+            "evidence": [
+              "3d02851c-596d-4a30-97dd-e0eb98a1c6b3"
+            ],
+            "stretch": false,
+            "note": "Tailwind CSS is explicitly listed in technical skills."
+          },
+          {
+            "req_id": "R3",
+            "label": "CONFIRMED",
+            "evidence": [
+              "3d02851c-596d-4a30-97dd-e0eb98a1c6b3"
+            ],
+            "stretch": false,
+            "note": "Git/GitHub is explicitly listed in technical skills."
+          },
+          {
+            "req_id": "R4",
+            "label": "CONFIRMED",
+            "evidence": [
+              "3d02851c-596d-4a30-97dd-e0eb98a1c6b3"
+            ],
+            "stretch": false,
+            "note": "SEO fundamentals is explicitly listed in technical skills."
+          },
+          {
+            "req_id": "R5",
+            "label": "CONFIRMED",
+            "evidence": [
+              "8c25b659-fbd8-4029-924e-419814d713f5",
+              "7aef42d6-fde6-4fdd-9b06-2ab925d25ed9"
+            ],
+            "stretch": false,
+            "note": "Maintains a personal website and GitHub profile with accessible projects."
+          },
+          {
+            "req_id": "R6",
+            "label": "CONFIRMED",
+            "evidence": [
+              "47ca73ae-29b7-4eaf-b7df-5369d71bd437",
+              "3d02851c-596d-4a30-97dd-e0eb98a1c6b3"
+            ],
+            "stretch": false,
+            "note": "TypeScript is explicitly listed in languages and technical skills."
+          },
+          {
+            "req_id": "R7",
+            "label": "CONFIRMED",
+            "evidence": [
+              "3d02851c-596d-4a30-97dd-e0eb98a1c6b3"
+            ],
+            "stretch": false,
+            "note": "PostgreSQL and general SQL-adjacent database experience listed in technical skills."
+          },
+          {
+            "req_id": "R8",
+            "label": "UNKNOWN",
+            "evidence": [],
+            "stretch": false,
+            "note": "GEO (Generative Engine Optimization) is not mentioned in profile."
+          }
+        ],
+        "criteria": [
+          {
+            "name": "skills",
+            "max": 40,
+            "score_min": 20,
+            "score_max": 30,
+            "reasoning": "Tailwind, Git, TypeScript, and SQL are confirmed. Nuxt/Vue is unknown (relies on React/Next.js adjacency)."
+          },
+          {
+            "name": "experience/qualifications",
+            "max": 20,
+            "score_min": 15,
+            "score_max": 20,
+            "reasoning": "SEO fundamentals and GitHub/portfolio requirements are fully confirmed."
+          },
+          {
+            "name": "location",
+            "max": 15,
+            "score_min": 15,
+            "score_max": 15,
+            "reasoning": "Candidate is located in Nairobi, Kenya, matching the company location."
+          },
+          {
+            "name": "pay",
+            "max": 15,
+            "score_min": 15,
+            "score_max": 15,
+            "reasoning": "Stipend of KES 7,650 per month is above zero and meets criteria for an internship role."
+          },
+          {
+            "name": "growth/mentorship",
+            "max": 10,
+            "score_min": 5,
+            "score_max": 10,
+            "reasoning": "Internship structure implies learning and growth opportunities."
+          }
+        ],
+        "blocking_gaps": [],
+        "unknowns": [
+          {
+            "req_id": "R1",
+            "question_hint": "Confirm willingness or ability to pick up Nuxt/Vue given strong React/Next.js background."
+          },
+          {
+            "req_id": "R8",
+            "question_hint": "Clarify familiarity with GEO (Generative Engine Optimization)."
+          }
+        ],
+        "reasoning": "The candidate matches the location requirement (Nairobi) and possesses core frontend skills such as TypeScript, Tailwind, Git, and SEO fundamentals. While Vue/Nuxt is unknown, React/Next.js experience serves as a strong adjacent stack. Pay is stated and legitimate for an internship context.",
+        "digest_summary": "Strong match for a local Nairobi frontend internship, featuring solid TypeScript, Tailwind, and portfolio assets, with minor framework adjacency for Vue/Nuxt.",
+        "score_min": 70,
+        "score_max": 90,
+        "recommendation": "apply"
+      },
+      "draft": {
+        "cv_variant": {
+          "summary": "Frontend Development Intern candidate based in Nairobi, Kenya, with hands-on experience in TypeScript, Tailwind CSS, Git, and SEO fundamentals, demonstrated through projects such as a Next.js dashboard.",
+          "section_order": [
+            "TECHNICAL SKILLS",
+            "projects",
+            "location"
+          ],
+          "notes": "Tailored to highlight Tailwind CSS, TypeScript, Git, and SEO fundamentals."
+        },
+        "cover_letter": {
+          "paragraphs": [
+            {
+              "text": "I am writing to apply for the Frontend Development Intern position at Nuvana HQ. Based in Nairobi, Kenya, I bring practical experience in frontend technologies including TypeScript, Tailwind CSS, and Git, alongside a solid understanding of SEO fundamentals.",
+              "claims": [
+                {
+                  "statement": "Based in Nairobi, Kenya",
+                  "profile_id": "3bd28cf7-d623-4403-a5f7-781e5861eb3b",
+                  "stretch": false
+                },
+                {
+                  "statement": "Experience in TypeScript, Tailwind CSS, and Git",
+                  "profile_id": "3d02851c-596d-4a30-97dd-e0eb98a1c6b3",
+                  "stretch": false
+                },
+                {
+                  "statement": "Solid understanding of SEO fundamentals",
+                  "profile_id": "3d02851c-596d-4a30-97dd-e0eb98a1c6b3",
+                  "stretch": false
+                }
+              ]
+            },
+            {
+              "text": "In my recent work, I developed applications using Next.js, React, and TypeScript, hosted on GitHub, and maintained a personal portfolio website. While my primary framework experience is in React and Next.js, my strong foundation in component-based architectures allows me to adapt quickly to Vue and Nuxt. You can review my work at https://github.com/Yusha254 and https://joshuakyalo.netlify.app.",
+              "claims": [
+                {
+                  "statement": "Developed applications using Next.js, React, and TypeScript",
+                  "profile_id": "a9ac3fc2-42ee-41b4-b63a-75855bf403c6",
+                  "stretch": false
+                },
+                {
+                  "statement": "Maintained a personal portfolio website and GitHub profile",
+                  "profile_id": "8c25b659-fbd8-4029-924e-419814d713f5",
+                  "stretch": false
+                }
+              ]
+            }
+          ]
+        },
+        "email": {
+          "subject": "",
+          "body": ""
+        },
+        "form_answers": [
+          {
+            "field": "Portfolio / GitHub",
+            "answer": "https://github.com/Yusha254 | https://joshuakyalo.netlify.app"
+          },
+          {
+            "field": "Framework Experience",
+            "answer": "I have extensive hands-on experience with React, Next.js, and React Native. Given my strong foundation in component-based architectures and TypeScript, I am well-equipped to pick up Nuxt and Vue rapidly."
+          }
+        ],
+        "claims": [
+          {
+            "statement": "Located in Nairobi, Kenya",
+            "profile_id": "3bd28cf7-d623-4403-a5f7-781e5861eb3b",
+            "stretch": false
+          },
+          {
+            "statement": "Proficient in Tailwind CSS, Git, and TypeScript",
+            "profile_id": "3d02851c-596d-4a30-97dd-e0eb98a1c6b3",
+            "stretch": false
+          },
+          {
+            "statement": "Maintains an accessible GitHub profile and portfolio website",
+            "profile_id": "8c25b659-fbd8-4029-924e-419814d713f5",
+            "stretch": false
+          }
+        ],
+        "why": "The candidate meets all key location, core technical skill (Tailwind, Git, TypeScript), and qualification requirements while being locally based in Nairobi with an active portfolio."
+      },
+      "verification": {
+        "pass": true,
+        "issues": []
+      }
+    }
+  ],
   "questions": [],
   "proposedFacts": [
     {
@@ -107,14 +478,6 @@
       "status": "proposed"
     },
     {
-      "text": "Technical skills include TypeScript, JavaScript, Next.js, React, React Native, Node.js, PHP (Laravel), Kotlin, Tailwind CSS, Responsive Web Design, SEO fundamentals, Three.js (learning), REST APIs, WebSockets, MongoDB, Firebase, Supabase, PostgreSQL, Git/GitHub, Agile, AI-assisted development (Claude Code, Copilot).",
-      "section": "TECHNICAL SKILLS",
-      "evidence": "Languages & Frameworks: TypeScript, JavaScript, Next.js, React, React Native, Node.js, PHP (Laravel), Kotlin...",
-      "source": "CV upload (pdf)",
-      "id": "3d02851c-596d-4a30-97dd-e0eb98a1c6b3",
-      "status": "proposed"
-    },
-    {
       "text": "Built Ganji, a React Native mobile app automating personal budgeting by parsing M-Pesa SMS transaction alerts in real time.",
       "section": "PROJECTS",
       "evidence": "Ganji — Fintech Expense Tracker Jan 2026 | Personal Project — Built a React Native mobile app that automates personal budgeting by parsing M-Pesa SMS transaction alerts in real time.",
@@ -131,43 +494,11 @@
       "status": "proposed"
     },
     {
-      "text": "Worked as a Freelance Mobile Developer on Yebo Voucher, building the mobile app in React Native and the backend with Node.js and Express.",
-      "section": "EXPERIENCE",
-      "evidence": "Freelance Mobile Developer — Yebo Voucher — live on Google Play 2026 | Contract — Built the mobile app in React Native... Built the backend with Node.js and Express...",
-      "source": "CV upload (pdf)",
-      "id": "81520e6e-ef9a-4bb5-a753-f11d3da9067f",
-      "status": "proposed"
-    },
-    {
-      "text": "Completed IT Support & Networking Attachment at Kenya Revenue Authority from Sep–Nov 2022 in Nairobi.",
-      "section": "EXPERIENCE",
-      "evidence": "IT Support & Networking Attachment — Kenya Revenue Authority Sep–Nov 2022 | Nairobi — Provided IT support across departments, diagnosing and resolving hardware and network issues for staff.",
-      "source": "CV upload (pdf)",
-      "id": "c74c22b8-88e3-4feb-8ab7-1faf8941933a",
-      "status": "proposed"
-    },
-    {
-      "text": "Worked as Junior Frontend Developer (Volunteer) at Songa (Ride-Hailing Prototype) from Jun 2023–Mar 2024 remotely.",
-      "section": "EXPERIENCE",
-      "evidence": "Junior Frontend Developer — Volunteer — Songa (Ride-Hailing Prototype) Jun 2023–Mar 2024 | Remote — Collaborated with a cross-functional team to prototype a ride-hailing application in an Agile workflow.",
-      "source": "CV upload (pdf)",
-      "id": "b8445028-7ff5-4a67-9246-4e9cfcab055a",
-      "status": "proposed"
-    },
-    {
       "text": "Computer Science coursework in progress at Moi University.",
       "section": "EDUCATION",
       "evidence": "Computer Science — Moi University | Coursework in progress",
       "source": "CV upload (pdf)",
       "id": "4594e06f-4017-440a-a583-87dd107910bb",
-      "status": "proposed"
-    },
-    {
-      "text": "Holds ALX ProDev Frontend Engineering (Aug–Dec 2025), ALX Professional Foundations (May–Aug 2025), and ALX AI Career Essentials (Mar–Apr 2024) certifications.",
-      "section": "CERTIFICATIONS",
-      "evidence": "ALX ProDev Frontend Engineering (Aug–Dec 2025) • ALX Professional Foundations (May–Aug 2025) • ALX AI Career Essentials (Mar–Apr 2024)",
-      "source": "CV upload (pdf)",
-      "id": "f8a0ac32-14f3-4c98-a139-3e6aa4f767bc",
       "status": "proposed"
     }
   ]

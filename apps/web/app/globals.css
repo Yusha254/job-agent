@@ -1565,6 +1565,72 @@ h1 {
     }
 }
 
+.profile-line {
+    display: grid;
+    grid-template-columns: minmax(32px, 72px) minmax(0, 1fr) auto;
+    align-items: start;
+}
+.profile-id {
+    width: auto;
+    min-width: 0;
+    max-width: 72px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-align: center;
+    line-height: 1.4;
+}
+.profile-text {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+.fact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px 8px;
+    max-width: 190px;
+}
+.fact-icon-action {
+    display: inline-grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    color: #8c736c;
+    cursor: pointer;
+}
+.fact-icon-action:hover {
+    background: #faebe7;
+    color: #a44f3c;
+}
+.fact-status.keep {
+    color: var(--green);
+}
+.duplicate-note {
+    display: block;
+    color: #8c6332 !important;
+}
+.profile-line.has-duplicates {
+    background: #fff8e9;
+}
+@media(max-width:700px) {
+    .profile-line {
+        grid-template-columns: 35px minmax(0, 1fr);
+        gap: 7px;
+    }
+    .fact-actions {
+        grid-column: 2;
+        justify-content: flex-start;
+        max-width: none;
+    }
+    .proposal-actions {
+        flex-wrap: wrap;
+    }
+}
+
     .settings-link {
         width: 28px;
         height: 28px;

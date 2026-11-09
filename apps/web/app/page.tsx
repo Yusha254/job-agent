@@ -3,9 +3,10 @@
 import { FormEvent, useEffect, useState } from 'react';
 import {
   ArrowDownUp, ArrowRight, BadgeCheck, BriefcaseBusiness, Check, ChevronDown, CircleAlert,
-  CircleHelp, ClipboardCheck, ExternalLink, FilePlus2, FileText, Filter, Globe2, Inbox, LoaderCircle,
-  MapPin, Plus, Search, Send, Settings2, ShieldCheck, Sparkles, Upload, UserRound, X,
+  CircleHelp, ClipboardCheck, FilePlus2, FileText, Filter, Globe2, Inbox, LoaderCircle,
+  MapPin, Plus, Search, Send, Settings2, ShieldCheck, Sparkles, UserRound, X,
 } from 'lucide-react';
+import { ProfileFactsPanel } from './components/ProfileFactsPanel';
 
 type JobStatus = 'NEW' | 'EXTRACTED' | 'FILTERED_OUT' | 'REJECTED' | 'SCORED' | 'AWAITING_ANSWERS' | 'DRAFTED' | 'VERIFIED' | 'AWAITING_APPROVAL' | 'APPROVED' | 'SENT' | 'SKIPPED';
 type Job = {
@@ -15,7 +16,7 @@ type Job = {
 };
 type ProfileLine = { id: string; text: string; section: string; status: 'confirmed' | 'proposed'; source?: string; sourceUrl?: string; evidence?: string };
 type UserSettings = {
-  name: string; homeLocation: string; githubUrl: string; applyThreshold: number; skipThreshold: number;
+  name: string; homeCity: string; homeCountry: string; githubUrl: string; applyThreshold: number; skipThreshold: number;
   weights: { skills: number; 'experience/qualifications': number; location: number; pay: number; 'growth/mentorship': number };
 };
 type Dashboard = { settings: UserSettings; jobs: Job[]; profile: ProfileLine[]; questions: any[]; proposedFacts: any[]; counts: Record<string, number> };
@@ -56,7 +57,7 @@ function formattedDate(value: string) { return new Date(value).toLocaleDateStrin
 
 export default function Home() {
   const [data, setData] = useState<Dashboard>({
-    settings: { name: 'Joshua Kyalo', homeLocation: 'Kenya', githubUrl: '', applyThreshold: 65, skipThreshold: 50, weights: { skills: 40, 'experience/qualifications': 20, location: 15, pay: 15, 'growth/mentorship': 10 } },
+    settings: { name: 'Joshua Kyalo', homeCity: '', homeCountry: 'Kenya', githubUrl: '', applyThreshold: 65, skipThreshold: 50, weights: { skills: 40, 'experience/qualifications': 20, location: 15, pay: 15, 'growth/mentorship': 10 } },
     jobs: [], profile: [], questions: [], proposedFacts: [], counts: {},
   });
   const [selectedId, setSelectedId] = useState('');
@@ -66,14 +67,10 @@ export default function Home() {
   const [error, setError] = useState('');
   const [compose, setCompose] = useState(false);
   const [answers, setAnswers] = useState<Record<string, string>>({});
-  const [profileText, setProfileText] = useState('');
-  const [showProfileForm, setShowProfileForm] = useState(false);
-  const [githubUrl, setGithubUrl] = useState('');
 
   async function refresh() {
     const result = await request<Dashboard>('/dashboard');
     setData(result);
-    setGithubUrl((current) => current || result.settings.githubUrl || '');
     setSelectedId((current) => current && result.jobs.some((job) => job.id === current) ? current : result.jobs[0]?.id ?? '');
   }
 
@@ -114,25 +111,18 @@ export default function Home() {
     setAnswers({});
   }
 
-  async function addProfile(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    await act('profile', () => request('/profile', { method: 'POST', body: JSON.stringify({ text: profileText, section: 'Experience' }) }));
-    setProfileText(''); setShowProfileForm(false);
+  async function addProfile(text: string) {
+    await act('profile', () => request('/profile', { method: 'POST', body: JSON.stringify({ text, section: 'Experience' }) }));
   }
 
-  async function importCV(event: React.ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    if (file) {
-      const form = new FormData();
-      form.append('file', file);
-      await act('cv-import', () => request('/profile/import', { method: 'POST', body: form }));
-    }
-    event.target.value = '';
+  async function importCV(file: File) {
+    const form = new FormData();
+    form.append('file', file);
+    await act('cv-import', () => request('/profile/import', { method: 'POST', body: form }));
   }
 
-  async function importGithub(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    await act('github-import', () => request('/profile/github', { method: 'POST', body: JSON.stringify({ url: githubUrl }) }));
+  async function importGithub(url: string) {
+    await act('github-import', () => request('/profile/github', { method: 'POST', body: JSON.stringify({ url }) }));
   }
 
   const selected = data.jobs.find((job) => job.id === selectedId);
@@ -219,14 +209,21 @@ export default function Home() {
 
           {data.questions.length > 0 && <section className="workflow-section" id="questions"><div className="section-title"><div><div className="eyebrow">PROFILE, ONCE</div><h2>Quick answers</h2></div><span>{data.questions.length} questions · shared across roles</span></div><form onSubmit={submitAnswers} className="question-grid">{data.questions.map((question) => <label className="question-item" key={question.id}><span>{question.text}</span><small>{question.answer_format || 'One-line answer; None is okay'}</small><input value={answers[question.id] ?? ''} onChange={(event) => setAnswers((current) => ({ ...current, [question.id]: event.target.value }))} placeholder="Your answer or None" /></label>)}<button className="primary-button" disabled={Boolean(busy)}>{busy === 'answers' ? <LoaderCircle className="spin" size={16} /> : <Check size={16} />}Save answers for review</button></form></section>}
 
-          <section className="workflow-section profile-section" id="profile"><div className="section-title"><div><div className="eyebrow">YOUR SOURCE OF TRUTH</div><h2>Profile facts</h2></div><button className="secondary-button" onClick={() => setShowProfileForm((current) => !current)}><Plus size={15} /> Add fact</button></div><p className="section-subtitle">Only confirmed facts can support a score or draft. Proposed facts stay out until you approve them.</p>
-            <div className="profile-imports"><label className="secondary-button upload-button"><Upload size={15} />{busy === 'cv-import' ? 'Reading CV…' : 'Import CV'}<input type="file" accept=".pdf,.docx,.txt,.md,.rtf,.png,.jpg,.jpeg,.webp" onChange={importCV} disabled={Boolean(busy)} /></label><form onSubmit={importGithub}><input type="url" value={githubUrl} onChange={(event) => setGithubUrl(event.target.value)} placeholder="https://github.com/username" aria-label="GitHub profile URL" /><button className="secondary-button" disabled={Boolean(busy)}>{busy === 'github-import' ? <LoaderCircle className="spin" size={15} /> : <ExternalLink size={15} />}Import GitHub</button></form></div>
-            {showProfileForm && <form className="profile-add" onSubmit={addProfile}><input value={profileText} onChange={(event) => setProfileText(event.target.value)} placeholder="Add a factual line about your experience" required /><button className="primary-button" disabled={Boolean(busy)}>Save as proposed</button></form>}
-            <div className="profile-list">{data.profile.map((line) => <div className="profile-line" key={line.id}><span className="profile-id">{line.id}</span><span className="profile-text"><strong>{line.section}{line.source ? ` · ${line.source}` : ''}</strong>{line.text}{line.evidence && <small>Evidence: {line.evidence}</small>}</span><button className={`fact-status ${line.status}`} onClick={() => act(`fact-${line.id}`, () => request(`/profile/${line.id}`, { method: 'PATCH', body: JSON.stringify({ status: line.status === 'confirmed' ? 'proposed' : 'confirmed' }) }))}>{line.status === 'confirmed' ? <><BadgeCheck size={14} />Confirmed</> : <><CircleAlert size={14} />Proposed</>}</button></div>)}
-              {data.proposedFacts.map((fact) => <div className="profile-line pending-fact" key={fact.id}><span className="profile-id">NEW</span><span className="profile-text"><strong>{fact.section || 'Profile update'}{fact.source ? ` · ${fact.source}` : ''}</strong>{fact.text}{fact.evidence && <small>Evidence: {fact.evidence}</small>}</span><button className="fact-status proposed" onClick={() => act('approve-facts', () => request('/profile/approve', { method: 'POST', body: JSON.stringify({ ids: [fact.id] }) }))}><Check size={14} />Approve</button></div>)}
-              {!data.profile.length && !data.proposedFacts.length && <div className="profile-empty"><UserRound size={19} /><span>Your profile is empty. Add confirmed facts before assessing a role.</span><button className="text-button" onClick={() => setShowProfileForm(true)}>Add a fact <ArrowRight size={14} /></button></div>}
-            </div>
-          </section>
+          <ProfileFactsPanel
+            profile={data.profile}
+            proposedFacts={data.proposedFacts}
+            githubUrl={data.settings.githubUrl}
+            busy={busy}
+            onGithubUrlChange={(githubUrl) => setData((current) => ({ ...current, settings: { ...current.settings, githubUrl } }))}
+            onImportCV={(file) => void importCV(file)}
+            onImportGithub={(githubUrl) => void importGithub(githubUrl)}
+            onAddFact={(text) => void addProfile(text)}
+            onApprove={(id) => void act(`approve-${id}`, () => request('/profile/approve', { method: 'POST', body: JSON.stringify({ ids: [id] }) }))}
+            onReject={(id) => void act(`reject-${id}`, () => request(`/profile/proposals/${id}`, { method: 'DELETE' }))}
+            onKeep={(id) => void act(`keep-${id}`, () => request(`/profile/proposals/${id}/keep`, { method: 'PATCH' }))}
+            onDelete={(id) => void act(`delete-${id}`, () => request(`/profile/${id}`, { method: 'DELETE' }))}
+            onToggleStatus={(fact) => void act(`fact-${fact.id}`, () => request(`/profile/${fact.id}`, { method: 'PATCH', body: JSON.stringify({ status: fact.status === 'confirmed' ? 'proposed' : 'confirmed' }) }))}
+          />
           <footer className="page-footer"><span>FIELDNOTE <i>·</i> YOUR APPLICATION WORKSPACE</span><span>Human judgment stays in the loop.</span></footer>
         </div>
       </section>

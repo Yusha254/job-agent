@@ -5,7 +5,8 @@ import { ArrowLeft, LoaderCircle, Save, Settings2 } from 'lucide-react';
 
 type Settings = {
   name: string;
-  homeLocation: string;
+  homeCity: string;
+  homeCountry: string;
   githubUrl: string;
   applyThreshold: number;
   skipThreshold: number;
@@ -19,7 +20,7 @@ type Settings = {
 };
 
 const DEFAULT_SETTINGS: Settings = {
-  name: 'Joshua Kyalo', homeLocation: 'Kenya', githubUrl: '', applyThreshold: 65, skipThreshold: 50,
+  name: 'Joshua Kyalo', homeCity: '', homeCountry: 'Kenya', githubUrl: '', applyThreshold: 65, skipThreshold: 50,
   weights: { skills: 40, 'experience/qualifications': 20, location: 15, pay: 15, 'growth/mentorship': 10 },
 };
 
@@ -81,7 +82,7 @@ export default function SettingsPage() {
           <form className="settings-form" onSubmit={save}>
             <section className="settings-block">
               <div className="settings-block-heading"><div><span className="eyebrow">PROFILE</span><h2>Who is applying?</h2></div><p>This name is used in the shared prompt and workspace.</p></div>
-              <div className="settings-fields"><label>Full name<input value={settings.name} onChange={(event) => { setSettings((current) => ({ ...current, name: event.target.value })); setSaved(false); }} required /></label><label>Home location<input value={settings.homeLocation} onChange={(event) => { setSettings((current) => ({ ...current, homeLocation: event.target.value })); setSaved(false); }} required /></label><label className="wide-field">GitHub profile URL<input type="url" value={settings.githubUrl} onChange={(event) => { setSettings((current) => ({ ...current, githubUrl: event.target.value })); setSaved(false); }} placeholder="https://github.com/username" /></label></div>
+              <div className="settings-fields"><label>Full name<input value={settings.name} onChange={(event) => { setSettings((current) => ({ ...current, name: event.target.value })); setSaved(false); }} required /></label><label>Home city<input value={settings.homeCity} onChange={(event) => { setSettings((current) => ({ ...current, homeCity: event.target.value })); setSaved(false); }} placeholder="Nairobi" /></label><label>Home country<input value={settings.homeCountry} onChange={(event) => { setSettings((current) => ({ ...current, homeCountry: event.target.value })); setSaved(false); }} required placeholder="Kenya" /></label><label className="wide-field">GitHub profile URL<input type="url" value={settings.githubUrl} onChange={(event) => { setSettings((current) => ({ ...current, githubUrl: event.target.value })); setSaved(false); }} placeholder="https://github.com/username" /></label></div>
             </section>
             <section className="settings-block">
               <div className="settings-block-heading"><div><span className="eyebrow">DECISION RANGE</span><h2>Score thresholds</h2></div><p>Roles between these thresholds wait for your answers.</p></div>
